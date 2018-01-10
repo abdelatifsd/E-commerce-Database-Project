@@ -1,0 +1,2 @@
+# E-commerce-Database-Project
+My teammate, Samah el Falah, and I, worked on creating an e-commerce database influenced by Amazon and similar platforms for our Database Design and Programming Course. In the ERD pdf, you'll find a paragraph explaining our design decisions, and a bunch of screen shots showing the progression of our DB design. The ReportsSQL file contain the queries we designed (RFM analysis) and the screenshots are there to show the queries in action.
