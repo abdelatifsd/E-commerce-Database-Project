@@ -1,0 +1,179 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid101\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid201\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid3}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid301\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid4}
+{\list\listtemplateid5\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid401\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid5}
+{\list\listtemplateid6\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid501\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid6}
+{\list\listtemplateid7\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid601\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid7}
+{\list\listtemplateid8\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid701\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid8}
+{\list\listtemplateid9\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid801\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid9}
+{\list\listtemplateid10\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker 3\{hyphen\}}{\leveltext\leveltemplateid901\'023\uc0\u8259 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid10}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}{\listoverride\listid5\listoverridecount0\ls5}{\listoverride\listid6\listoverridecount0\ls6}{\listoverride\listid7\listoverridecount0\ls7}{\listoverride\listid8\listoverridecount0\ls8}{\listoverride\listid9\listoverridecount0\ls9}{\listoverride\listid10\listoverridecount0\ls10}}
+\margl1440\margr1440\vieww12840\viewh16440\viewkind1
+\deftab720
+\pard\pardeftab720\ri0\sl276\slmult1\sa200\partightenfactor0
+
+\f0\b\fs22 \cf0 RFM analysis\
+\pard\pardeftab720\li720\fi-360\ri0\sl276\slmult1\sa200\partightenfactor0
+\ls1\ilvl0\cf0 1-	Recency\
+\pard\pardeftab720\li720\ri0\sl276\slmult1\sa200\partightenfactor0
+
+\b0 \cf0 Create view recency as\
+select O.orderdate as orderdate,U.userId as userID from users U\
+join orders O on U.UserID = O.UserID\
+group by userid\
+order by orderdate desc
+\f1 \
+\
+\pard\pardeftab720\li720\fi-360\ri0\sl276\slmult1\sa200\partightenfactor0
+\ls2\ilvl0
+\f0\b \cf0 2-	Frequency\
+\pard\pardeftab720\li720\ri0\sl276\slmult1\sa200\partightenfactor0
+
+\f1\b0 \cf0 Create view frequency as\
+select count(O.orderID) as frequency ,U.userId as userID from users U\
+join orders O on U.UserID = O.UserID\
+group by userid\
+order by frequency desc
+\b \
+\pard\pardeftab720\li720\fi-360\ri0\sl276\slmult1\sa200\partightenfactor0
+\ls3\ilvl0
+\f0 \cf0 3-	
+\f1 Monetary Value\
+\pard\pardeftab720\li720\ri0\sl276\slmult1\sa200\partightenfactor0
+
+\f0\b0 \cf0 create view mostvalue as\
+select U.userID,max((O.itemquantity * P.unitprice) + O.salestax ) as Value from users U \
+join orders O on U.UserID = O.UserID\
+join orders_has_product OHP on OHP.Orders_OrderID = O.OrderID\
+join product P on P.ProductID = OHP.Product_ProductID\
+group by userID\
+order by value desc;
+\f1 \
+\pard\pardeftab720\li720\fi-360\ri0\sl276\slmult1\sa200\partightenfactor0
+\ls4\ilvl0
+\f0\b \cf0 4-	RFM View\
+\pard\pardeftab720\li720\ri0\sl276\slmult1\sa200\partightenfactor0
+
+\b0 \cf0 create view rfmview as\
+select U.userID,max((O.itemquantity * P.unitprice) + O.salestax ) as Value from users U \
+join orders O on U.UserID = O.UserID\
+join orders_has_product OHP on OHP.Orders_OrderID = O.OrderID\
+join product P on P.ProductID = OHP.Product_ProductID\
+group by userID order by value desc;\
+\pard\pardeftab720\li720\fi-360\ri0\sl276\slmult1\sa200\partightenfactor0
+\ls5\ilvl0
+\b \cf0 5-	RFM Mean
+\f1 \
+\pard\pardeftab720\li720\ri0\sl276\slmult1\sa200\partightenfactor0
+
+\f0\b0 \cf0 create view RFM_Mean as\
+select avg(recency) as mean_rec, avg(frequency) as mean_freq, avg(value) as mean_value\
+from RFMView;\
+\pard\pardeftab720\li720\fi-360\ri0\sl276\slmult1\sa200\partightenfactor0
+\ls6\ilvl0\cf0 6-	RFM Scoring\
+\pard\pardeftab720\li720\ri0\sl276\slmult1\sa200\partightenfactor0
+\cf0 create view RFM_SCORING as\
+select userID,\
+(Case when rfmview.frequency > rfm_mean.mean_freq then 1\
+else 0\
+End) as Freq,\
+(Case when rfmview.recency > rfm_mean.mean_rec then 1\
+else 0\
+End) as Recent,\
+(Case when rfmview.value > rfm_mean.mean_value then 1\
+else 0 \
+end) as Valuable\
+from rfmview,rfm_mean\
+group by userID,Freq,Recent,Value;\
+\pard\pardeftab720\li720\fi-360\ri0\sl276\slmult1\sa200\partightenfactor0
+\ls7\ilvl0
+\b \cf0 7-	Final RFM Score
+\f1 \
+\pard\pardeftab720\li720\ri0\sl276\slmult1\sa200\partightenfactor0
+
+\f0\b0 \cf0 create view finalRFMScore as\
+select userID,max(freq + Recent + valuable) as score from RFM_SCORING\
+group by userID\
+order by score desc;
+\f1 \
+\pard\pardeftab720\ri0\sl276\slmult1\sa200\partightenfactor0
+\cf0 \
+\pard\pardeftab720\ri0\sl276\slmult1\sa200\partightenfactor0
+
+\f0\b \cf0 Other queries:
+\b0 \
+\pard\pardeftab720\li720\fi-360\ri0\sl276\slmult1\sa200\partightenfactor0
+\ls8\ilvl0\cf0 1-	
+\b Targeted Marketing
+\b0 \
+\pard\pardeftab720\li720\ri0\sl276\slmult1\sa200\partightenfactor0
+\cf0 # A query to figure out what drove the user to buy the product\
+# This would help the ecommerce platform in targeted marketing\
+select U.userID,rating,U.UserFName,U.User_Type,P.ProductName, P.UnitPrice,P.ProductDesc, R.CustomerReview from users U\
+join Orders O on U.UserID = O.UserID\
+join orders_has_product OHP on OHP.Orders_OrderID = O.OrderID\
+join product P on P.ProductID = OHP.Product_ProductID\
+join reviews R on R.productID = P.ProductID\
+group by userID\
+;\
+\pard\pardeftab720\ri0\sl276\slmult1\sa200\partightenfactor0
+
+\f1 \cf0 \
+\pard\pardeftab720\li720\fi-360\ri0\sl276\slmult1\sa200\partightenfactor0
+\ls9\ilvl0
+\f0 \cf0 2-	
+\b Discovering if there is a relationship between quantity of purchases and membership type
+\b0 \
+\pard\pardeftab720\li720\ri0\sl276\slmult1\sa200\partightenfactor0
+\cf0 # Is there a relationship between the type of user membership and the quantity of purchases? This query\
+# will help us figure that out
+\f1 \
+
+\f0 select U.userID, mb.MembershipType, P.Quantity from users U\
+# getting access to the membership entity\
+join Buyers B on B.UserID = U.UserID\
+join membership mb on mb.MembershipID = B.membershipID\
+# getting access to products\
+join Orders O on U.UserID = O.UserID\
+join orders_has_product OHP on OHP.Orders_OrderID = O.OrderID\
+join product P on P.ProductID = OHP.Product_ProductID
+\f1 \
+
+\f0 group by U.userID;
+\f1 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\ri0\sl276\slmult1\sa200\partightenfactor0
+\ls10\ilvl0
+\f0\b \cf0 {\listtext	3\uc0\u8259 	}Discovering who ordered what and how they rated said product. Additional info: Order date and since when the customer has been a client.\
+\pard\pardeftab720\li720\ri0\partightenfactor0
+
+\b0 \cf0 SELECT *\
+FROM\
+ (\
+SELECT \
+concat(UserFName, ' ', UserLName) AS 'Customer Name',\
+    DateCreated AS 'Client Since',\
+    TimeStamp,\
+    Concat(AddressLine1, ' ',City) AS 'Customer Address',\
+    OrderID\
+\
+FROM Users\
+INNER JOIN Orders ON Orders.UserID = Users.UserID\
+INNER JOIN Address ON Address.UserID = Users.UserID)\
+ Orders\
+\
+INNER JOIN \
+(\
+SELECT \
+	ProductName AS 'Product',\
+	CustomerReview AS 'Review',\
+    	Rating   \
+\
+FROM Product\
+INNER JOIN Reviews ON Reviews.ProductID = Product.ProductID\
+INNER JOIN Orders_has_Product ON Orders_has_Product.Product_ProductID = Product.ProductID\
+) Product ;\
+}
